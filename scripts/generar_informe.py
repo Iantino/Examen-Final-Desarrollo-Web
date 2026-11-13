@@ -21,7 +21,6 @@ def p(text, style='BodyCustom'):
     story.append(Paragraph(text, styles[style]))
 
 story.append(Spacer(1, 68))
-p('DESARROLLO WEB / EXAMEN FINAL', 'SubCustom')
 p('Serie 4<br/>API REST de Vehículos', 'TitleCustom')
 p('Django REST Framework + MySQL', 'SubCustom')
 story.append(Spacer(1, 34))
@@ -64,14 +63,12 @@ assert len(code.splitlines()) <= 15
 story.append(Preformatted(code, styles['CodeCustom']))
 story.append(Spacer(1, 18))
 p('El servidor debe estar activo en 127.0.0.1:8000. El componente debe integrarse en una aplicación React servida desde el mismo origen o con un proxy; si se usa otro origen, se debe configurar CORS. GitHub almacena el código y no hospeda esta API ni su base de datos.')
-p('Referencias: docs.djangoproject.com/en/5.2/ref/databases/ y www.django-rest-framework.org/api-guide/serializers/', 'SubCustom')
 
 def footer(canvas, doc):
     canvas.setStrokeColor(colors.HexColor('#ccd8e3'))
     canvas.line(48, 44, A4[0] - 48, 44)
     canvas.setFont('Helvetica', 8)
     canvas.setFillColor(colors.HexColor('#527086'))
-    canvas.drawString(48, 30, 'Serie 4 - Vehículos | Fritz Ian Valentino Urizar Rodas')
     canvas.drawRightString(A4[0]-48, 30, str(doc.page))
 
 doc = SimpleDocTemplate(str(OUT / 'Serie4_Vehiculos.pdf'), pagesize=A4,
