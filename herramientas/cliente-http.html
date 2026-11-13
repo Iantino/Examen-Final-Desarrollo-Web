@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cliente HTTP | Serie 4</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#edf2f7;color:#132b43;font:16px 'Segoe UI',sans-serif}main{max-width:1120px;margin:32px auto}header{display:flex;justify-content:space-between;align-items:center}h1{margin:8px 0;font-size:30px}small{letter-spacing:2px;color:#527086}.badge{background:#d5f1e7;padding:10px 18px;border-radius:30px;color:#12624d}section{background:white;border:1px solid #d5dfe8;border-radius:12px;padding:24px;margin-top:20px}label{display:block;font-weight:600;margin-bottom:10px}.request{display:flex;gap:12px}select,input,textarea,button{font:inherit;padding:12px;border:1px solid #a8bacb;border-radius:6px}input{flex:1}textarea{width:100%;height:140px;font-family:Consolas,monospace;font-size:15px;resize:vertical}button{background:#164f83;color:white;cursor:pointer;border:0}button:disabled{opacity:.5}h2{font-size:18px;margin:0 0 15px}.meta{display:flex;gap:15px;align-items:center;margin-bottom:12px}#status{font-weight:700;background:#e5eef7;padding:8px;border-radius:5px}pre{margin:0;background:#11283d;color:#e2eef8;padding:20px;border-radius:6px;font:15px/1.5 Consolas,monospace;white-space:pre-wrap;word-break:break-word;min-height:65px}.hint{color:#587086;font-size:13px}.two{display:grid;grid-template-columns:1fr 1.15fr;gap:20px}#case{font-size:17px;color:#246588}footer{margin-top:16px;color:#587086;font-size:13px}
+</style>
+<main><header><div><small>DESARROLLO WEB / SERIE 4</small><h1>Cliente de pruebas HTTP</h1><div id="case">API REST de Vehículos</div></div><span class="badge">Django REST + MySQL</span></header>
+<section><label for="url">Solicitud</label><div class="request"><select id="method" aria-label="Método"><option>GET</option><option>POST</option><option>PUT</option><option>DELETE</option></select><input id="url" aria-label="URL"><button id="send">Enviar solicitud</button></div><p class="hint">Accept: application/json · Content-Type: application/json · Sin autenticación</p></section>
+<div class="two"><section><h2>Cuerpo enviado (JSON)</h2><textarea id="body" aria-label="Cuerpo JSON" placeholder="Sin cuerpo para GET y DELETE"></textarea><p class="hint">Los datos se envían al servidor real mediante fetch.</p></section><section><h2>Respuesta del servidor</h2><div class="meta"><span id="status">Sin ejecutar</span><span id="time"></span></div><pre id="response">Envía una solicitud.</pre></section></div>
+<footer>Herramienta local de pruebas HTTP · Evidencia obtenida contra http://127.0.0.1:8000</footer></main>
+<script>
+document.querySelector('#url').value=location.origin+'/api/vehiculos/';
+document.querySelector('#send').onclick=async()=>{
+ const method=document.querySelector('#method').value, url=document.querySelector('#url').value;
+ const body=document.querySelector('#body').value, start=performance.now();
+ const button=document.querySelector('#send');button.disabled=true;
+ try {
+  const options={method,headers:{Accept:'application/json','Content-Type':'application/json'}};
+  if(method==='POST'||method==='PUT') {JSON.parse(body);options.body=body;}
+  const response=await fetch(url,options), raw=await response.text();
+  document.querySelector('#status').textContent=response.status+' '+response.statusText;
+  document.querySelector('#response').textContent=raw?JSON.stringify(JSON.parse(raw),null,2):'(Sin cuerpo: HTTP 204)';
+  document.querySelector('#time').textContent=Math.round(performance.now()-start)+' ms';
+ }catch(error){document.querySelector('#status').textContent='Error de cliente';document.querySelector('#response').textContent=error.message;}
+ finally{button.disabled=false;}
+};
+</script></html>
