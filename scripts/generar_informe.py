@@ -10,7 +10,7 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image, Page
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / 'entrega'
 OUT.mkdir(exist_ok=True)
-data = json.loads((ROOT / 'evidencia/pruebas-capturadas.json').read_text(encoding='utf-8'))
+data = json.loads((ROOT / 'evidencia/pruebas-postman.json').read_text(encoding='utf-8'))
 styles = getSampleStyleSheet()
 styles.add(ParagraphStyle(name='TitleCustom', fontName='Helvetica-Bold', fontSize=32, leading=38, textColor=colors.HexColor('#153854'), spaceAfter=20))
 styles.add(ParagraphStyle(name='SubCustom', fontSize=12, leading=18, textColor=colors.HexColor('#426580'), spaceAfter=12))
@@ -25,7 +25,7 @@ p('Serie 4<br/>API REST de Vehículos', 'TitleCustom')
 p('Django REST Framework + MySQL', 'SubCustom')
 story.append(Spacer(1, 34))
 p('<b>Estudiante:</b> Fritz Ian Valentino Urizar Rodas<br/><b>Carné:</b> 3090-22-8199<br/><b>Fecha:</b> 12 de noviembre de 2026')
-p('<b>Recurso elegido:</b> Vehículos.<br/><b>Herramienta de pruebas:</b> cliente HTTP local incluido en el proyecto, ejecutado en Microsoft Edge mediante Playwright.')
+p('<b>Recurso elegido:</b> Vehículos.<br/><b>Herramienta de pruebas:</b> Postman, ejecutado contra la API local conectada a MySQL.')
 p('API local: http://127.0.0.1:8000/api/vehiculos/')
 p('Repositorio: <link href="https://github.com/Iantino/Examen-Final-Desarrollo-Web" color="#164f83">github.com/Iantino/Examen-Final-Desarrollo-Web</link>')
 p('Implementación sin autenticación, conforme al enunciado. Incluye operaciones para crear, listar, consultar por ID, actualizar y eliminar; respuestas JSON y validación de campos obligatorios.')
@@ -46,9 +46,12 @@ for index, (item, explanation) in enumerate(zip(data, explanations), 1):
     p(f"<b>{item['metodo']}</b> {escape(item['url'])}<br/><b>Estado comprobado:</b> {item['estado']}")
     p(explanation)
     image_path = ROOT / f'evidencia/{index:02}.png'
-    story.append(Image(str(image_path), width=499, height=499 * 950 / 1280))
+    capture = Image(str(image_path))
+    capture.drawHeight = 499 * capture.imageHeight / capture.imageWidth
+    capture.drawWidth = 499
+    story.append(capture)
     story.append(Spacer(1, 15))
-    p('Captura real del cliente HTTP: método, URL, cuerpo enviado y respuesta del servidor. El archivo evidencia/pruebas-capturadas.json conserva los datos originales.', 'SubCustom')
+    p('Captura real de Postman: método, URL y respuesta del servidor. Las solicitudes POST y PUT muestran también el cuerpo enviado.', 'SubCustom')
     story.append(PageBreak())
 
 p('INCISO B / CONSUMO CON REACT', 'SubCustom')

@@ -1,7 +1,7 @@
 # Examen final - Serie 4: API REST de Vehículos
 
 Proyecto académico con **Django REST Framework y MySQL**, sin autenticación.
-Incluye CRUD, validación, migraciones, pruebas, cliente HTTP local, colección Postman,
+Incluye CRUD, validación, migraciones, pruebas y colección Postman,
 evidencias reales y ejemplo de consumo en React (15 líneas).
 
 ## Requisitos e instalación (PowerShell)
@@ -18,7 +18,6 @@ Copy-Item .env.example .env
 .\.venv\Scripts\python manage.py runserver 127.0.0.1:8000
 ```
 
-Abrir http://127.0.0.1:8000/ para el cliente de pruebas.
 API: http://127.0.0.1:8000/api/vehiculos/
 Las credenciales y el entorno virtual se excluyen del control de versiones.
 La base `examenfinal_vehiculos` se crea sin alterar otras bases.
@@ -62,11 +61,11 @@ y lo elimina. No elimina otros registros. Las respuestas reales quedan en `evide
 La colección `herramientas/vehiculos.postman_collection.json` se importa en Postman;
 ejecutarla en orden para guardar automáticamente el ID del registro creado.
 
-Las seis capturas `evidencia/01.png` a `06.png` provienen del cliente HTTP incluido,
+Las seis capturas `evidencia/01.png` a `06.png` provienen de Postman,
 ejecutado contra el servidor y MySQL locales. Muestran URL, método, cuerpo,
-estado y respuesta. El JSON asociado permite inspeccionar la evidencia original.
-Para repetir las capturas: instalar Playwright (`npm install --no-save playwright`)
-y ejecutar `node scripts/capturas.cjs` con Microsoft Edge instalado.
+estado y respuesta. Para repetirlas, importar la colección en Postman, ejecutar
+las seis solicitudes en orden y capturar cada respuesta. No se incluye una
+aplicación de consumo propia.
 
 ## Consumo en React
 

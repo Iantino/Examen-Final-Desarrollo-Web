@@ -1,0 +1,69 @@
+[
+  {
+    "titulo": "01 Crear vehículo",
+    "metodo": "POST",
+    "url": "http://127.0.0.1:8000/api/vehiculos/",
+    "enviado": {
+      "marca": "Toyota",
+      "modelo": "Corolla",
+      "anio": 2024,
+      "color": "Blanco"
+    },
+    "estado": 201,
+    "herramienta": "Postman 12.36.3 - Lightweight API Client",
+    "captura": "01.png"
+  },
+  {
+    "titulo": "02 Listar vehículos",
+    "metodo": "GET",
+    "url": "http://127.0.0.1:8000/api/vehiculos/",
+    "enviado": null,
+    "estado": 200,
+    "herramienta": "Postman 12.36.3 - Lightweight API Client",
+    "captura": "02.png"
+  },
+  {
+    "titulo": "03 Consultar por ID",
+    "metodo": "GET",
+    "url": "http://127.0.0.1:8000/api/vehiculos/3/",
+    "enviado": null,
+    "estado": 200,
+    "herramienta": "Postman 12.36.3 - Lightweight API Client",
+    "captura": "03.png"
+  },
+  {
+    "titulo": "04 Actualizar vehículo",
+    "metodo": "PUT",
+    "url": "http://127.0.0.1:8000/api/vehiculos/3/",
+    "enviado": {
+      "marca": "Toyota",
+      "modelo": "Corolla",
+      "anio": 2024,
+      "color": "Azul"
+    },
+    "estado": 200,
+    "herramienta": "Postman 12.36.3 - Lightweight API Client",
+    "captura": "04.png"
+  },
+  {
+    "titulo": "05 Validar datos inválidos",
+    "metodo": "POST",
+    "url": "http://127.0.0.1:8000/api/vehiculos/",
+    "enviado": {
+      "marca": "",
+      "anio": 1800
+    },
+    "estado": 400,
+    "herramienta": "Postman 12.36.3 - Lightweight API Client",
+    "captura": "05.png"
+  },
+  {
+    "titulo": "06 Eliminar vehículo",
+    "metodo": "DELETE",
+    "url": "http://127.0.0.1:8000/api/vehiculos/3/",
+    "enviado": null,
+    "estado": 204,
+    "herramienta": "Postman 12.36.3 - Lightweight API Client",
+    "captura": "06.png"
+  }
+]
